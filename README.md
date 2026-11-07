@@ -22,6 +22,16 @@ A MacBook Pro screen can get much brighter than its brightness slider allows. ma
 - **Turns itself off.** Press Ctrl-C and the screen is back to normal at once. It also stops if the Mac gets hot.
 - **Free and private.** No account. It never connects to the internet.
 
+## The problem, and how SunBoost solves it
+
+**The problem.** Outdoors, a MacBook screen is hard to read. Sunlight bounces off the glass and washes out the picture, and the brightness slider stops at a level that is not enough. The screen could get much brighter, because MacBook Pro displays can reach about four times that level. macOS keeps that extra light for HDR video and does not let the rest of the screen use it.
+
+**How it solves it.**
+
+1. SunBoost keeps one invisible HDR pixel on screen. While something is drawing HDR, macOS opens up the extra brightness.
+2. It then scales the screen's brightness curve up to the limit macOS reports (about 4 times), so everything on screen gets brighter, not just video.
+3. It never asks for more than the screen allows, so bright parts do not turn flat white. Optional sliders lift dark areas and black so they do not disappear in glare.
+
 ## Install (3 minutes)
 
 1. Press **⌘ Space**, type **Terminal**, press **Return**.
