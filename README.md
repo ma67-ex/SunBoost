@@ -31,13 +31,25 @@ A MacBook Pro screen can get much brighter than its brightness slider allows. ma
    git clone https://github.com/ma67-ex/SunBoost.git
    cd SunBoost
    ./build.sh
+   ./build_app.sh
    ```
 
-3. Wait until it says **Built ./sunboost**.
+3. Wait until it says **Built SunBoost.app**. `build.sh` makes the command line tool, `build_app.sh` makes the app.
 
 If macOS asks you to install the command line developer tools, click **Install**, wait for it to finish, then run `./build.sh` again.
 
 ## Use it
+
+### The app
+
+1. Run `open SunBoost.app` in the SunBoost folder. A window opens and a sun appears in the menu bar.
+2. Click the big **sun** button. The screen gets brighter within a second. Click it again to stop.
+3. Drag **Brightness boost**, or tap **Comfort**, **Sun** or **Glare**. **Lift dark areas** and **Lift black** keep dark parts visible in glare.
+4. Pick an **Auto-off** time if you want it to switch itself off.
+
+The window also shows how hot the Mac is and how much brightness the screen allows right now. Quitting the app puts the screen back to normal.
+
+### The command line
 
 1. In Terminal, in the SunBoost folder, run:
 
@@ -85,7 +97,7 @@ Cautions:
 - **Colours are not accurate.** Do not use it for photo, video or design work.
 - **Above about 4.0 it does not help.** More gain than the screen allows only turns bright parts flat white, so SunBoost caps it.
 - **Tested on one Mac.** An M5 MacBook Pro with the built-in Liquid Retina XDR screen. Other MacBook Pro models with the same screen should work. Screens without HDR headroom are refused with a message.
-- **It is a command line tool.** There is no menu bar button yet.
+- **The app is not signed by Apple.** If macOS blocks it, right-click `SunBoost.app`, choose **Open**, then **Open** again.
 
 ## Privacy
 
@@ -93,7 +105,7 @@ Everything stays on your Mac. SunBoost never opens a network connection and writ
 
 ## For developers
 
-One file, [sunboost.swift](sunboost.swift). It uses only public APIs: a `CAMetalLayer` with `wantsExtendedDynamicRangeContent`, `NSScreen.maximumExtendedDynamicRangeColorComponentValue` for the live headroom, and `CGSetDisplayTransferByTable` for the brightness curve. The table API accepts values above 1.0. The formula API (`CGSetDisplayTransferByFormula`) silently clamps at 1.0, so do not use it. The drawing needs a real draw call each frame, or macOS never opens the headroom.
+The engine is [Sources/Shared/Booster.swift](Sources/Shared/Booster.swift), shared by the command line tool (`Sources/CLI`) and the SwiftUI app (`Sources/App`). It uses only public APIs: a `CAMetalLayer` with `wantsExtendedDynamicRangeContent`, `NSScreen.maximumExtendedDynamicRangeColorComponentValue` for the live headroom, and `CGSetDisplayTransferByTable` for the brightness curve. The table API accepts values above 1.0. The formula API (`CGSetDisplayTransferByFormula`) silently clamps at 1.0, so do not use it. The drawing needs a real draw call each frame, or macOS never opens the headroom.
 
 `./sunboost --selftest` checks the curve maths. `build.sh` runs it after building.
 
