@@ -66,9 +66,22 @@ Two small tricks, both with normal macOS calls.
 
 Every two seconds it re-reads the live headroom and re-applies, so it keeps working after sleep or when you plug in a display.
 
+## Safety
+
+**4.0 is the safe maximum.** It is the limit macOS itself reports for this screen, so it stays inside the range the display is built for. SunBoost never goes above the live limit, even if you ask for more (`--gain 8` still stops at about 4). It changes no system files and no hardware settings.
+
+Cautions:
+
+- **Heat.** Full brightness in direct sun heats the Mac from both sides. Take breaks, keep the vents clear, and do not run it on a soft surface like a bed or a bag. SunBoost turns itself off if macOS reports serious heat, but that is a last resort, not a plan.
+- **Battery.** It drains the battery fast. Plug in if you plan to use it for long.
+- **Your eyes.** It is very bright. Stop it when you go indoors or when it gets dark. Do not use it at night.
+- **Do not leave it running.** Press Ctrl-C when you are done. If Terminal closes or the app crashes, macOS puts the screen back to normal on its own.
+- **Stuck bright?** Run `pkill sunboost`, or restart the Mac. Both restore the screen.
+- **Not tested for long sessions.** Only short tests were run on one Mac. Treat long use as at your own risk and watch the temperature.
+- **No warranty.** This is free software under the MIT License, provided as is.
+
 ## Things to know
 
-- **Heat and battery.** Running near full brightness uses a lot of power and warms the Mac. Expect the battery to drain fast. macOS may dim the screen on its own when it gets hot, and SunBoost switches itself off if the Mac reports serious heat. These were not measured over long sessions, only in short tests.
 - **Colours are not accurate.** Do not use it for photo, video or design work.
 - **Above about 4.0 it does not help.** More gain than the screen allows only turns bright parts flat white, so SunBoost caps it.
 - **Tested on one Mac.** An M5 MacBook Pro with the built-in Liquid Retina XDR screen. Other MacBook Pro models with the same screen should work. Screens without HDR headroom are refused with a message.
